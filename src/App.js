@@ -4,11 +4,13 @@ import theme from './theme/theme';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import JobCard from './components/Job/JobCard';
+import NewJobNodal from './components/Job/NewJobModal';
 
 export default () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
+      <NewJobNodal />
       <Grid container justify='center'>
         <Grid item xs={10}>
           <SearchBar />
