@@ -5,6 +5,7 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import JobCard from './components/Job/JobCard';
 import NewJobNodal from './components/Job/NewJobModal';
+import jobData from './dummyData';
 
 export default () => {
   return (
@@ -14,10 +15,7 @@ export default () => {
       <Grid container justify='center'>
         <Grid item xs={10}>
           <SearchBar />
-          <JobCard />
-          <JobCard />
-          <JobCard />
-          <JobCard />
+            {jobData.map(job => <JobCard key={job.id} {...job} />)}
         </Grid>
       </Grid>
     </ThemeProvider>

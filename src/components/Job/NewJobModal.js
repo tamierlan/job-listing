@@ -31,9 +31,9 @@ export default (props) => {
     'SQL'
   ]
   return (
-    <Dialog open={true} fullWidth>
+    <Dialog open={false} fullWidth>
       <DialogTitle>
-        <Box>
+        <Box display='flex' justifyContent='space-between' alignItems='center'>
           Post Job
           <IconButton>
             <CloseIcon />
