@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, makeStyles, Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogAction, Typography } from '@material-ui/core';
+import { Button, IconButton, makeStyles, Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
+import { Close as CloseIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   skillChip: {
@@ -31,7 +32,14 @@ export default (props) => {
   ]
   return (
     <Dialog open={true} fullWidth>
-      <DialogTitle>Post Jobs</DialogTitle>
+      <DialogTitle>
+        <Box>
+          Post Job
+          <IconButton>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      </DialogTitle>
       <DialogContent>
         <Grid spacing={2} container>
 
@@ -80,12 +88,14 @@ export default (props) => {
           </Box>
         </Box>
       </DialogContent>
-      <DialogAction>
-        <Box>
-          <Typography>Required fields</Typography>
-          <Button></Button>
+      <DialogActions>
+        <Box color='red' width='100%' display='flex' alignItems='center' justifyContent='space-between'>
+          <Typography variant='caption'>Required fields</Typography>
+          <Button variant='contained' disableElevation color='primary'>
+            Post job
+          </Button>
         </Box>
-      </DialogAction>
+      </DialogActions>
     </Dialog>
   )
 }
