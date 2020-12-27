@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
-import { Button, IconButton, makeStyles, Box, Grid, FilledInput, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@material-ui/core';
+import {
+  CircularProgress,
+  Button,
+  IconButton,
+  makeStyles,
+  Box,
+  Grid,
+  FilledInput,
+  Select,
+  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Typography } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
@@ -24,17 +38,20 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
+const initState = {
+  title: '',
+  type: 'Full time',
+  companyName: '',
+  companyUrl: '',
+  location: 'Remote',
+  link: '',
+  description: '',
+  skills: []
+}
+
 export default (props) => {
-  const [ jobDetails, setJobDetails ] = useState({
-    title: '',
-    type: 'Full time',
-    companyName: '',
-    companyUrl: '',
-    location: 'Remote',
-    link: '',
-    description: '',
-    skills: []
-  })
+  const [ loading, setLoading ] = useState(false);
+  const [ jobDetails, setJobDetails ] = useState(initState);
 
   console.log(jobDetails)
   const handleChange = e => {
@@ -51,7 +68,15 @@ export default (props) => {
   }
 
   const handleSubmit = async () => {
+    setLoading(true)
     await props.postJob(jobDetails);
+    closeModal()
+  }
+
+  const closeModal = () => {
+    setJobDetails(initState)
+    setLoading(false)
+    props.closeModal()
   }
 
   const skills = [
@@ -66,11 +91,11 @@ export default (props) => {
 
   const classes = useStyles();
   return (
-    <Dialog open={true} fullWidth>
+    <Dialog open={props.newJobModal} fullWidth>
       <DialogTitle>
         <Box display='flex' justifyContent='space-between' alignItems='center'>
           Post Job
-          <IconButton>
+          <IconButton onClick={closeModal}>
             <CloseIcon />
           </IconButton>
         </Box>
@@ -174,8 +199,18 @@ export default (props) => {
       <DialogActions>
         <Box color='red' width='100%' display='flex' alignItems='center' justifyContent='space-between'>
           <Typography variant='caption'>Required fields</Typography>
-          <Button onClick={handleSubmit} variant='contained' disableElevation color='primary'>
-            Post job
+          <Button
+            disabled={loading}
+            onClick={handleSubmit}
+            variant='contained'
+            disableElevation
+            color='primary'>
+            { loading
+              ?
+              <CircularProgress color='secondary' size={22} />
+              :
+              'Post job'
+            }
           </Button>
         </Box>
       </DialogActions>
