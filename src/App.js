@@ -5,7 +5,7 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import JobCard from './components/Job/JobCard';
 import NewJobNodal from './components/Job/NewJobModal';
-import { firestore } from './firebase/config';
+import { firestore, app } from './firebase/config';
 
 export default () => {
   const [ jobs, setJobs ] = useState([]);
@@ -23,6 +23,13 @@ export default () => {
 
   }
 
+  const postJob = async jobDetails => {
+    await firestore.collection('jobs').add({
+      ...jobDetails,
+      postedOn: app.firestore.FieldValue.serverTimestamp()
+    })
+  }
+
   useEffect(() => {
     fetchJobs();
   }, [])
@@ -30,7 +37,7 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <NewJobNodal />
+      <NewJobNodal postJob={postJob} />
       <Grid container justify='center'>
         <Grid item xs={10}>
           <SearchBar />

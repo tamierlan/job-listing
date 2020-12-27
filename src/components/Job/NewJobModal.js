@@ -50,6 +50,10 @@ export default (props) => {
     setJobDetails(oldState => ({ ...oldState, skills: oldState.skills.concat(skill) }))
   }
 
+  const handleSubmit = async () => {
+    await props.postJob(jobDetails);
+  }
+
   const skills = [
     'JavaScript',
     'React',
@@ -172,7 +176,7 @@ export default (props) => {
       <DialogActions>
         <Box color='red' width='100%' display='flex' alignItems='center' justifyContent='space-between'>
           <Typography variant='caption'>Required fields</Typography>
-          <Button variant='contained' disableElevation color='primary'>
+          <Button onClick={handleSubmit} variant='contained' disableElevation color='primary'>
             Post job
           </Button>
         </Box>
