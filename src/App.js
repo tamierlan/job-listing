@@ -30,7 +30,7 @@ export default () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      // <NewJobNodal />
+      <NewJobNodal />
       <Grid container justify='center'>
         <Grid item xs={10}>
           <SearchBar />
