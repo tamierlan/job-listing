@@ -107,8 +107,6 @@ export default (props) => {
               onChange={handleChange}
               name='companyName'
               value={jobDetails.companyName}
-              name='title'
-              value={jobDetails.title}
               autoComplete='off'
               fullWidth
               placeholder='Company name'
