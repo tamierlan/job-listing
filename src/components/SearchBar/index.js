@@ -25,11 +25,11 @@ export default (props) => {
     setJobSearch(oldState => ({ ...oldState, [e.target.name]: e.target.value }))
   }
 
-  const search = async () => {
-    setLoading(true);
-    await props.fetchJobsCustom(jobSearch);
-    setLoading(false);
-  }
+  // const search = async () => {
+  //   setLoading(true);
+  //   await props.fetchJobsCustom(jobSearch);
+  //   setLoading(false);
+  // }
 
   return (
     <Box p={2} mt={-5} mb={2} className={classes.wrapper}>
