@@ -53,7 +53,6 @@ export default (props) => {
   const [ loading, setLoading ] = useState(false);
   const [ jobDetails, setJobDetails ] = useState(initState);
 
-  console.log(jobDetails)
   const handleChange = e => {
     e.persist();
     setJobDetails(oldState => ({ ...oldState, [e.target.name]: e.target.value }))
@@ -68,9 +67,14 @@ export default (props) => {
   }
 
   const handleSubmit = async () => {
+    for (const field in jobDetails) {
+      if (typeof jobDetails[field] === 'string' && !jobDetails[field]) return;
+    }
+    if (!jobDetails.skills.length) return;
+
     setLoading(true)
     await props.postJob(jobDetails);
-    closeModal()
+    setTimeout(() => closeModal(), 700)
   }
 
   const closeModal = () => {
