@@ -14,6 +14,7 @@ export default () => {
   const [ loading, setLoading ] = useState(true);
   const [ customSearch, setCustomSearch ] = useState(false)
   const [ newJobModal, setNewJobModal ] = useState(false);
+  const [ viewJob, setViewJob ] = useState({});
 
   const fetchJobs = async () => {
     setCustomSearch(false)
@@ -60,7 +61,7 @@ export default () => {
         closeModal={() => setNewJobModal(false)}
         newJobModal={newJobModal}
         postJob={postJob} />
-      <ViewJobModal />
+      <ViewJobModal job={viewJob} closeModal={() => setViewJob({})} />
       <Box mb={3}>
         <Grid container justify='center'>
           <Grid item xs={10}>
@@ -79,7 +80,7 @@ export default () => {
                       </Button>
                     </Box>
                   }
-                  {jobs.map(job => <JobCard key={job.id} {...job} />)}
+                  {jobs.map(job => <JobCard open={() => setViewJob(job)} key={job.id} {...job} />)}
                 </>
             }
           </Grid>
