@@ -6,6 +6,7 @@ import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import JobCard from './components/Job/JobCard';
 import NewJobNodal from './components/Job/NewJobModal';
+import ViewJobModal from './components/Job/ViewJobModal';
 import { firestore, app } from './firebase/config';
 
 export default () => {
@@ -59,6 +60,7 @@ export default () => {
         closeModal={() => setNewJobModal(false)}
         newJobModal={newJobModal}
         postJob={postJob} />
+      <ViewJobModal />
       <Box mb={3}>
         <Grid container justify='center'>
           <Grid item xs={10}>
